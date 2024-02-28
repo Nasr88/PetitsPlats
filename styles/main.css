@@ -1,0 +1,327 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    max-width: 1400px;
+    margin: 0 auto;
+    font-size: 62.5%;
+    font-family: "Manrope", sans-serif;
+  }
+  
+  label, button, input {
+    border: none;
+    outline: none;
+  }
+  
+  button, label {
+    cursor: pointer;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  .header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    padding: 40px 60px;
+  }
+  .header::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/images/banner.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(0.7);}
+  @media screen and (max-width: 1160px) {
+    .header {
+      padding: 40px 20px;
+      height: 350px;
+    }
+    .cta div input {
+      padding-left: 10px;
+      height: 50px;
+    }
+    .cta div label {
+      right: 0;
+      top: 0;
+      border-bottom-left-radius: unset;
+      border-top-left-radius: unset;
+    }
+    .cta div label::after {
+      font-size: 1rem;
+    }
+    
+      .cta div button {
+        right: 65px;
+      }
+      .cta div button::after {
+        font-size: 1.2rem;
+      }
+    }
+  
+  .logo {
+    width: 200px;
+  }
+  .cta {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  .cta h1 {
+    display: flex;
+    flex-direction: column;
+    color: #FFD15B;
+    font-family: "Anton", sans-serif;
+    font-weight: 100;
+    text-align: left;
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    text-transform: uppercase;
+  }
+  .cta div {
+    position: relative;
+    max-width: 1024px;
+    width: 100%;
+  }
+  .cta div input {
+    width: 100%;
+    height: 70px;
+    padding-left: 30px;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    border-radius: 10px;
+  }
+  .cta div input::placeholder {
+    font-size: clamp(0.7rem, 2vw, 1.6rem);
+  }
+  /* .cta div input:focus {
+    outline: 2px solid #FFD15B;
+  } */
+  
+  .cta div label {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    background-color: #000;
+  }
+  
+  .cta div label:focus, .cta div label:hover {
+    background-color: #FFD15B;
+  }
+  .cta div label:focus::after, .cta div label:hover::after {
+    color: #000;
+  }
+  .cta div label::after {
+    content: "\f002";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #fff;
+  }
+  
+  /* .cta div button {
+    display: none;
+  } */
+  main {
+    padding: 40px 80px 0;
+    background-color: #C6C6C6;
+}
+
+/* main .filters {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 60px;
+    width: 100%;
+} */
+#filters {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 60px;
+    width: 100%;
+}
+
+/* card section */
+.card_section {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  flex-wrap: wrap;
+  gap: 50px;
+  padding: 40px 0;
+
+}
+
+@media screen and (max-width: 1160px) {
+  .card_section {
+    gap: 30px;
+    padding: 20px 0;
+  }
+}
+
+  @media screen and (max-width: 910px) {
+    .card_section {
+      grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));  
+  }
+  }
+  @media screen and (max-width: 500px) {
+    .card_section {
+      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
+
+  p{
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      font-family: 'Manrope', sans-serif;
+  }
+
+  .card {
+      position: relative;
+      height: 600px;
+      max-width: 400px;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #fff;
+  }
+      @media screen and (max-width: 500px) {
+        .card{
+          height: 400px;
+        }
+         
+      }
+
+      .card_time {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          padding: 5px 10px;
+          border-radius: 10px;
+          font-size: .8rem;
+          font-family:'Manrope', sans-serif;
+          background-color:  #FFD15B;
+      }
+
+    .card  img {
+          width: 100%;
+          height: 50%;
+          object-fit: cover;
+          object-position: center;
+    }
+
+          @media screen and (max-width: 500px) {
+            .card  img {
+              height: 50%;
+          }
+      }
+
+
+      .card_infos {
+        display: flex;
+        flex-direction: column;
+          height: 50%;
+          gap: 20px;
+          padding: 20px;
+          overflow-y: scroll;
+      }
+          @media screen and (max-width: 500px) {
+            .card_infos {
+              padding: 10px;
+              gap: 15px;
+            }
+              
+          }
+
+          .card_infos h2 {
+              font-family: 'Anton', sans-serif;
+              font-size: clamp(1.2rem, 2vw, 1.5rem);
+              font-weight: 100;
+          }
+
+          .card_instructions {
+            display: flex;
+            flex-direction: column;
+              gap: 20px;
+              font-family: 'Manrope', sans-serif;
+          }
+              @media screen and (max-width: 500px) {
+                .card_instructions{
+                  gap: 10px;
+                }
+                  
+              }
+
+              .card_instructions h3 {
+                  text-transform: uppercase;
+                  color:  #7A7A7A;
+                  letter-spacing: 2px;
+                  font-size: clamp(1rem, 1.8vw, 1.2rem);
+                  font-weight: 900;
+              }
+
+              .card_instructions p {
+                  font-size: .9rem;
+              }
+          
+
+          .card_ingredients {
+            display: flex;
+            flex-direction: column;
+              gap: 20px;
+              font-family: 'Manrope', sans-serif;}
+
+              @media screen and (max-width: 500px) {
+                .card_ingredients{
+                  gap: 10px;
+                }   
+              }
+
+              .card_ingredients    h3 {
+                  text-transform: uppercase;
+                  color:  #7A7A7A;
+                  letter-spacing: 2px;
+                  font-size: clamp(1rem, 1.8vw, 1.2rem);
+              }
+
+              .card_ingredients  ul {
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 20px 0;
+                  font-size: clamp(.9rem, 1vw, .9rem);
+              }
+                  @media screen and (max-width: 500px) {
+                    .card_ingredients  ul{
+                      gap: 10px;
+                    }
+                     
+                  }
+
+                  .card_ingredients  li {
+                    display: flex;
+                    flex-direction: column;
+                      width: 45%;
+
+                      span:nth-child(1) {
+                          font-weight: bold;
+                      }
+                    }
