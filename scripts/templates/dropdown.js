@@ -39,7 +39,7 @@ export class dropdownTemplate {
 
           <button class="deleteDdlBtn" tabindex="0" style="display: block;"></button>
           <!-- Dropdown content goes here -->
-          <ul class="h-48 py-2 overflow-y-auto text-gray-700 dark:text-gray-200">
+          <ul id="options-${this.IdDropdown}" class="listItems h-48 py-2 overflow-y-auto text-gray-700 dark:text-gray-200">
            ${this.Items.map(
              (element, index) =>
                `<li id="${this.IdDropdown}-Item${index}" class="item block px-4 py-2 text-gray-700 hover:bg-customYellow active:bg-blue-100 cursor-pointer rounded-md font-normal text-sm">${element}</li>`
@@ -96,8 +96,7 @@ export class dropdownTemplate {
     items.forEach((item) => {
       item.addEventListener("click", () => {
         const tagWord = `
-        <div class="inline-flex items-center overflow-hidden text-white  h-14   px-4 py-2 text-sm font-medium  rounded-md rounded bg-customYellow text-black gap-15 mt-5">
-         <span id="tag-${
+        <span id="tag-${
            item.id
          }"  class="tagItem inline-flex items-center bg-customYellow px-2 py-1 me-2 text-sm mr-2  font-manrope font-normal text-base font-medium rounded text-black">
            ${item.textContent.toLowerCase()}
@@ -113,13 +112,15 @@ export class dropdownTemplate {
              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
            </svg>
          </button>
-        </div>
+       
             `;
 
         if (!document.getElementById(`tag-${item.id}`)) {
           var tempDiv = document.createElement("div");
+          tempDiv.classList.add("inline-flex", "items-center", "overflow-hidden", "text-black",  "h-14",   "px-4", "py-2", "text-sm", "font-medium",  "rounded-md", "rounded", "bg-customYellow", "text-black", "gap-15", "mt-5")
           tempDiv.innerHTML = tagWord;
           DivTags.appendChild(tempDiv);
+
         }
       });
     });

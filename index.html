@@ -13,7 +13,8 @@
     <link rel="icon" type="image/png" href="./images/favicon.png">
     <!-- font awasome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script  type="module" src="scripts/pages/index.js"></script>
+    <script defer type="module" src="scripts/pages/index.js"></script>
+    <script defer type="module" src="scripts/utils/principalSearch.js"></script>
 </head>
 <body>
     <header class="header">
@@ -32,7 +33,7 @@
             
             <div>
                 <div class="flex w-full mx-10 rounded-xl bg-white">
-                    <input class=" w-full h-20 px-8 font-manrope text-base sm:text-lg lg:text-xl border rounded-2xl " type="search" name="search" placeholder="Rechercher une recette, un ingrédient,..."maxlength="50"
+                    <input class=" pricipalSearch w-full h-20 px-8 font-manrope text-base sm:text-lg lg:text-xl border rounded-2xl " type="search" name="search" placeholder="Rechercher une recette, un ingrédient,..."maxlength="50"
                      />
                     <button type="submit" class="m-2 rounded-xl bg-black text-white hover:bg-customYellow  hover:text-black px-4 py-2 " aria-hidden="true" aria-label="Clear search">
                         <svg class="fill-current h-6 w-6 " xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
