@@ -2,7 +2,7 @@ import {dropdownUtilities} from "../utils/displayDropDown.js"
 import {RecipeCard} from "../templates/RecipeCard.js" 
 import {recipes} from "../recipes.js"
  
-class home{
+export class home{
     constructor(){
         new dropdownUtilities().displayDropDown(recipes);
         this.displayRecipes();
