@@ -1,4 +1,4 @@
-export class RecipeCard {
+export class recipeCardTemplate {
     constructor(recipe) {
         this.recipe = recipe;
     }

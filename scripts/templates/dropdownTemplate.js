@@ -1,12 +1,15 @@
+import {searchBarUtility} from "../utils/searchBarUtility.js"
+import{tagTemplate} from "../templates/tagTemplate.js"
 export class dropdownTemplate {
+  
   constructor(nameDropDown,idDropdown, items) {
     this.NameDropDown = nameDropDown;
     this.IdDropdown = idDropdown;
     this.Items = items;
-    this.createTemplate();
+    this.createDropdownTemplate();
   }
 
-  createTemplate() {
+  createDropdownTemplate() {
     const DropDownHtml = `
       <div class="relative group ">
         <button id="dropdown-button-${
@@ -50,7 +53,7 @@ export class dropdownTemplate {
     </div>`;
     const newDiv = document.createElement("div");
     newDiv.innerHTML = DropDownHtml;
-    document.getElementById("filters").appendChild(newDiv);
+    document.querySelector(".dropdowns").appendChild(newDiv);
     const dropdownButton = document.getElementById(
       `dropdown-button-${this.IdDropdown}`
     );
@@ -60,7 +63,7 @@ export class dropdownTemplate {
     const searchInput = document.getElementById(
       `search-input-${this.IdDropdown}`
     );
-    let isOpen = false; // Set to true to open the dropdown by default
+    let isOpen = true; // Set to false to open the dropdown by default
 
     // Function to toggle the dropdown state
     function toggleDropdown() {
@@ -75,7 +78,7 @@ export class dropdownTemplate {
       toggleDropdown();
     });
 
-    // Add event listener to filter items based on input
+    // Add event listener to filter items based on input (tailwind tagsearch)
     searchInput.addEventListener("input", () => {
       const searchTerm = searchInput.value.toLowerCase();
       const items = dropdownMenu.querySelectorAll("li");
@@ -89,40 +92,6 @@ export class dropdownTemplate {
         }
       });
     });
-
-    const DivTags = document.querySelector(".tag_section");
-    const items = dropdownMenu.querySelectorAll("li");
-
-    items.forEach((item) => {
-      item.addEventListener("click", () => {
-        const tagWord = `
-        <span id="tag-${
-           item.id
-         }"  class="tagItem inline-flex items-center bg-customYellow px-2 py-1 me-2 text-sm mr-2  font-manrope font-normal text-base font-medium rounded text-black">
-           ${item.textContent.toLowerCase()}
-         </span>
-       
-         <button onclick="return this.parentNode.remove();"
-           class="inline-flex items-center justify-center w-13 h-4 transition-color focus:outline-none focus:ring"
-           type="button"
-         >
-           <span class="sr-only" > Close </span>
-       
-           <svg  class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-           </svg>
-         </button>
-       
-            `;
-
-        if (!document.getElementById(`tag-${item.id}`)) {
-          var tempDiv = document.createElement("div");
-          tempDiv.classList.add("inline-flex", "items-center", "overflow-hidden", "text-black",  "h-14",   "px-4", "py-2", "text-sm", "font-medium",  "rounded-md", "rounded", "bg-customYellow", "text-black", "gap-15", "mt-5")
-          tempDiv.innerHTML = tagWord;
-          DivTags.appendChild(tempDiv);
-
-        }
-      });
-    });
+    //new tagTemplate(dropdownMenu).createTagTemplate();
   }
 }
