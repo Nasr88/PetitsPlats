@@ -3,13 +3,12 @@ import { recipeCardTemplate } from "../templates/RecipeCardTemplate.js";
 import { recipes } from "../recipes.js";
 import { searchBarUtility } from "../utils/searchBarUtility.js";
 import { tagTemplate } from "../templates/tagTemplate.js";
-
+export let filtredRecipes = recipes;
 export class home {
   constructor() {
     new dropdownUtilities().displayDropDown(recipes);
     this.displayRecipes();
-    
-   
+
     // Écouteur d'événement sur le champ de recherche
     document.querySelector(".principalSearch").addEventListener("input", function () {
         // Appeler la fonction de recherche avec la valeur actuelle du champ de recherche
@@ -17,8 +16,9 @@ export class home {
 
         // Vérifiez si la saisie a au moins 3 lettres avant de lancer la recherche
         if (userInput.length >= 3) {
-          const filtredRecipes = new searchBarUtility().searchRecipesLinear();
+           filtredRecipes = new searchBarUtility().searchRecipesLinear();
            new searchBarUtility().filterAndDisplayCards(filtredRecipes);
+           
         }
 
         // sert à s'assurer que même si l'utilisateur a saisi uniquement des espaces dans la barre de recherche, cela ne sera pas considéré comme un terme de recherche valide.
@@ -31,6 +31,7 @@ export class home {
           document.querySelector(".dropdowns").innerHTML = "";
           document.querySelector(".card_section").innerHTML = "";
           // L'utilisateur a supprimé le texte de recherche et affiche toutes les recettes
+          filtredRecipes = recipes;
           new home().displayRecipes();         
         }
       });

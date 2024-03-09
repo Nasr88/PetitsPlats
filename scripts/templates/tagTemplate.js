@@ -5,6 +5,7 @@ export class tagTemplate {
   SelectedUstensils =   this.GetTagsValues("dropdown-menu-ustensiles-dropdown");
   SelectedAppareils =   this.GetTagsValues("dropdown-menu-appareils-dropdown");
   constructor() {
+    
     const dropdownIngredients = document.getElementById(
       "dropdown-menu-ingredients-dropdown"
     );
@@ -45,7 +46,7 @@ export class tagTemplate {
          </button>
        
             `;
-//Pour tester si le tag existe déja:
+        //Pour tester si le tag existe déja:
         if (!document.getElementById(`tag-${item.id}`)) {
           let tempDiv = document.createElement("div");
           tempDiv.classList.add(

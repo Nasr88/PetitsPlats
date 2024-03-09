@@ -11,7 +11,7 @@ export class searchBarUtility {
     const numberOfRecipes = document.querySelector(".recipes_count");
 
       if (!filtredRecipes.length) {
-        cardSection.innerHTML = "<p>Aucune recette n'a été trouvée.</p>";
+        cardSection.innerHTML = "<p>Aucune recette n'a été trouvée.</p>"; 
         numberOfRecipes.textContent = ``;
       } else {
         // Effacez les cartes existantes
