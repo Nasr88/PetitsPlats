@@ -17,6 +17,7 @@ export class tagTemplate {
     this.createTagTemplate(dropdownIngredients);
     this.createTagTemplate(dropdownUstensils);
     this.createTagTemplate(dropdownAppareils);
+    
   }
   createTagTemplate(dropdownMenu) {
     const DivTags = document.querySelector(".tag_section");
@@ -30,8 +31,10 @@ export class tagTemplate {
            ${item.textContent.toLowerCase()}
          </span>
        
-         <button onclick="return this.parentNode.remove();"
-           class="inline-flex items-center justify-center w-13 h-4 transition-color focus:outline-none focus:ring"
+         <button id="btnCloseTag-${
+          item.id
+        }" 
+           class="closeButton inline-flex items-center justify-center w-13 h-4 transition-color focus:outline-none focus:ring"
            type="button"
          >
            <span class="sr-only" > Close </span>
@@ -42,7 +45,7 @@ export class tagTemplate {
          </button>
        
             `;
-
+//Pour tester si le tag existe déja:
         if (!document.getElementById(`tag-${item.id}`)) {
           let tempDiv = document.createElement("div");
           tempDiv.classList.add(
@@ -64,6 +67,13 @@ export class tagTemplate {
           );
           tempDiv.innerHTML = tagWord;
           DivTags.appendChild(tempDiv);
+
+          document?.getElementById(`btnCloseTag-${item.id}`)?.addEventListener("click", (event) => {
+            const closeButton = event.target;
+            this.removeTag(dropdownMenu.id,item.id);
+            
+         });
+
           if (dropdownMenu.id === "dropdown-menu-ingredients-dropdown") 
             this.SelectedIngredients.push(item.textContent.toLowerCase());
              
@@ -78,10 +88,14 @@ export class tagTemplate {
             this.SelectedUstensils,
             this.SelectedAppareils
           );
+
         }
       });
     });
+
+   
   }
+
   GetTagsValues(dropdownMenuID) {
     let elements = document.querySelectorAll(
       `[data-category="${dropdownMenuID}"]`
@@ -94,4 +108,34 @@ export class tagTemplate {
     });
     return temp;
   }
+
+  removeTag(tagCategoryId,tagId) {
+      
+      /*const tagCategoryId = button.getAttribute('data-category');
+      const tagId = button.getAttribute('data-tag-id');*/
+  
+      const tagToRemove = document.getElementById(`tag-${tagId}`);
+      if (tagToRemove) {
+          tagToRemove.parentNode.remove();
+  
+          // Retirez le tag des tableaux Selected
+          if (tagCategoryId === "dropdown-menu-ingredients-dropdown") 
+              this.SelectedIngredients = this.SelectedIngredients.filter(tag => tag !== tagToRemove.innerText.toLowerCase().trim());
+               
+          if (tagCategoryId === "dropdown-menu-ustensiles-dropdown") 
+              this.SelectedUstensils = this.SelectedUstensils.filter(tag => tag !== tagToRemove.innerText.toLowerCase().trim());
+          
+          if (tagCategoryId === "dropdown-menu-appareils-dropdown")
+              this.SelectedAppareils = this.SelectedAppareils.filter(tag => tag !== tagToRemove.innerText.toLowerCase().trim());
+  
+          // Mettez à jour les filtres
+          new tagSearchUtility().searchByTags(
+              this.SelectedIngredients,
+              this.SelectedUstensils,
+              this.SelectedAppareils
+          );
+      }
+  }
+  
 }
+

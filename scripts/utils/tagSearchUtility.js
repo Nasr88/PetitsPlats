@@ -8,12 +8,13 @@ export class tagSearchUtility{
         
         const filteredRecipes = recipes.filter(recipe => {
 
-            const ingredientsMatch = tagsIngredients.every(tag => recipe.ingredients.some(ingredient =>
-                ingredient.ingredient.toLowerCase() === tag.toLowerCase()));
+            const ingredientsMatch = tagsIngredients.every(tag => recipe?.ingredients?.some(ingredient =>
+                ingredient?.ingredient?.toLowerCase() === tag.toLowerCase()));
 
-            const ustensilsMatch = tagsUstensils.every(tag => recipe.ustensils.toLowerCase().includes(tag.toLowerCase()));
+            const ustensilsMatch = tagsUstensils.every(tag => recipe?.ustensils.some(ustensil =>
+                ustensil.toLowerCase() === tag.toLowerCase()));
     
-            const appareilsMatch = tagsAppareils.every(tag => recipe.appliance.toLowerCase().includes(tag.toLowerCase()));
+            const appareilsMatch = tagsAppareils.every(tag => recipe?.appliance?.toLowerCase().includes(tag.toLowerCase()));
     
             // La recette doit correspondre à tous les onglets actifs
             return ingredientsMatch && ustensilsMatch && appareilsMatch;
