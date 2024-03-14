@@ -8,7 +8,7 @@ export class home {
   constructor() {
     new dropdownUtilities().displayDropDown(recipes);
     this.displayRecipes();
-
+    //new tagTemplate();
     // Écouteur d'événement sur le champ de recherche
     document.querySelector(".principalSearch").addEventListener("input", function () {
         // Appeler la fonction de recherche avec la valeur actuelle du champ de recherche
@@ -18,7 +18,6 @@ export class home {
         if (userInput.length >= 3) {
            filtredRecipes = new searchBarUtility().searchRecipesLinear();
            new searchBarUtility().filterAndDisplayCards(filtredRecipes);
-           
         }
 
         // sert à s'assurer que même si l'utilisateur a saisi uniquement des espaces dans la barre de recherche, cela ne sera pas considéré comme un terme de recherche valide.

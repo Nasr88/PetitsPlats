@@ -1,11 +1,11 @@
 import { tagSearchUtility } from "../utils/tagSearchUtility.js";
 
 export class tagTemplate {
-  SelectedIngredients = this.GetTagsValues("dropdown-menu-ingredients-dropdown");
-  SelectedUstensils =   this.GetTagsValues("dropdown-menu-ustensiles-dropdown");
-  SelectedAppareils =   this.GetTagsValues("dropdown-menu-appareils-dropdown");
-  constructor() {
-    
+ 
+  SelectedIngredients=[]
+  SelectedUstensils =[]
+  SelectedAppareils = []
+  constructor() {   
     const dropdownIngredients = document.getElementById(
       "dropdown-menu-ingredients-dropdown"
     );
@@ -15,10 +15,15 @@ export class tagTemplate {
     const dropdownAppareils = document.getElementById(
       "dropdown-menu-appareils-dropdown"
     );
+ 
+
     this.createTagTemplate(dropdownIngredients);
     this.createTagTemplate(dropdownUstensils);
-    this.createTagTemplate(dropdownAppareils);
-    
+    this.createTagTemplate(dropdownAppareils);  
+
+    this.SelectedIngredients = this.GetTagsValues("dropdown-menu-ingredients-dropdown");
+    this.SelectedUstensils =   this.GetTagsValues("dropdown-menu-ustensiles-dropdown");
+    this.SelectedAppareils =   this.GetTagsValues("dropdown-menu-appareils-dropdown");
   }
   createTagTemplate(dropdownMenu) {
     const DivTags = document.querySelector(".tag_section");
@@ -69,11 +74,7 @@ export class tagTemplate {
           tempDiv.innerHTML = tagWord;
           DivTags.appendChild(tempDiv);
 
-          document?.getElementById(`btnCloseTag-${item.id}`)?.addEventListener("click", (event) => {
-            const closeButton = event.target;
-            this.removeTag(dropdownMenu.id,item.id);
-            
-         });
+          
 
           if (dropdownMenu.id === "dropdown-menu-ingredients-dropdown") 
             this.SelectedIngredients.push(item.textContent.toLowerCase());
@@ -83,6 +84,8 @@ export class tagTemplate {
         
           if (dropdownMenu.id === "dropdown-menu-appareils-dropdown")
             this.SelectedAppareils.push(item.textContent.toLowerCase());
+
+            
 
           new tagSearchUtility().searchByTags(
             this.SelectedIngredients,
@@ -94,6 +97,13 @@ export class tagTemplate {
       });
     });
 
+  document.querySelectorAll(".tagItem").forEach((tag)=>{
+    tag?.parentElement?.querySelector(".closeButton")?.addEventListener("click", (event) => {
+      const closeButton = event.target;
+      this.removeTag(tag.getAttribute("data-category"),tag.id);
+    });
+  })
+     
    
   }
 
@@ -110,33 +120,47 @@ export class tagTemplate {
     return temp;
   }
 
-  removeTag(tagCategoryId,tagId) {
+  
       
-      /*const tagCategoryId = button.getAttribute('data-category');
+     
+  
+      removeTag(tagCategoryId, tagId) {
+
+         /*const tagCategoryId = button.getAttribute('data-category');
       const tagId = button.getAttribute('data-tag-id');*/
-  
-      const tagToRemove = document.getElementById(`tag-${tagId}`);
-      if (tagToRemove) {
-          tagToRemove.parentNode.remove();
-  
-          // Retirez le tag des tableaux Selected
-          if (tagCategoryId === "dropdown-menu-ingredients-dropdown") 
-              this.SelectedIngredients = this.SelectedIngredients.filter(tag => tag !== tagToRemove.innerText.toLowerCase().trim());
-               
-          if (tagCategoryId === "dropdown-menu-ustensiles-dropdown") 
-              this.SelectedUstensils = this.SelectedUstensils.filter(tag => tag !== tagToRemove.innerText.toLowerCase().trim());
-          
-          if (tagCategoryId === "dropdown-menu-appareils-dropdown")
-              this.SelectedAppareils = this.SelectedAppareils.filter(tag => tag !== tagToRemove.innerText.toLowerCase().trim());
-  
-          // Mettez à jour les filtres
-          new tagSearchUtility().searchByTags(
-              this.SelectedIngredients,
-              this.SelectedUstensils,
-              this.SelectedAppareils
-          );
-      }
-  }
+
+        let _SelectedIngredients = this.GetTagsValues("dropdown-menu-ingredients-dropdown");
+        let _SelectedUstensils = this.GetTagsValues("dropdown-menu-ustensiles-dropdown");
+        let _SelectedAppareils = this.GetTagsValues("dropdown-menu-appareils-dropdown");
+        const tagToRemove = document.getElementById(`${tagId}`);
+        if (tagToRemove) {
+            tagToRemove.parentNode.remove();
+    
+            // Retirez le tag des tableaux Selected
+            const tagText = tagToRemove.innerText.toLowerCase().trim();
+            if (tagCategoryId === "dropdown-menu-ingredients-dropdown") 
+            _SelectedIngredients = _SelectedIngredients.filter(tag => tag !== tagText);
+            /*else 
+               this.SelectedIngredients = _SelectedIngredients;*/
+
+            if (tagCategoryId === "dropdown-menu-ustensiles-dropdown") 
+            _SelectedUstensils = _SelectedUstensils.filter(tag => tag !== tagText);
+            /*else
+              this.SelectedUstensils = _SelectedUstensils;*/
+            
+             if (tagCategoryId === "dropdown-menu-appareils-dropdown")
+              _SelectedAppareils = _SelectedAppareils.filter(tag => tag !== tagText);
+            /*else
+              this.SelectedAppareils = _SelectedAppareils;*/
+    
+            // Mettez à jour les filtres
+            new tagSearchUtility().searchByTags(
+              _SelectedIngredients,
+              _SelectedUstensils,
+              _SelectedAppareils
+            );
+        }
+    }
   
 }
 

@@ -99,6 +99,6 @@ export class dropdownTemplate {
         }
       });
     });
-    //new tagTemplate(dropdownMenu).createTagTemplate();
+    //new tagTemplate().createTagTemplate(dropdownMenu);
   }
 }
