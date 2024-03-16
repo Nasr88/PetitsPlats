@@ -1,8 +1,6 @@
 import { recipes } from "../recipes.js";
 import { recipeCardTemplate } from "../templates/RecipeCardTemplate.js";
 import { dropdownUtilities } from "./dropdownUtilities.js";
-import { home } from "../pages/index.js";
-import { tagTemplate } from "../templates/tagTemplate.js";
 
 export class searchBarUtility {
   // Ajoutez une fonction pour filtrer et afficher les cartes
@@ -19,9 +17,11 @@ export class searchBarUtility {
         cardSection.innerHTML = "";
 
         // Affichez les nouvelles cartes filtrées
-        filtredRecipes.forEach((recipe) => {
+        for (let i = 0; i < filtredRecipes.length; i++ ){
+          const recipe = filtredRecipes[i];
           new recipeCardTemplate(recipe).createCard();
-        });
+        }
+       
 
         // Obtenez les ingrédients des recettes filtrées
         const filtersSection = document.querySelector(".dropdowns");
@@ -32,20 +32,35 @@ export class searchBarUtility {
         new dropdownUtilities().displayDropDown(filtredRecipes);
         
       }
-    //}
+   
   }
   searchRecipesLinear() {
     const userInput = document.querySelector(".principalSearch").value.trim();
     const query = userInput.toLowerCase();
+    const filteredRecipes = [];
 
-    return recipes.filter(
-      (recipe) =>
+    for (let i = 0; i < recipes.length; i++) {
+      const recipe = recipes[i];
+      const ingredients = recipe.ingredients;
+      let ingredientMatch = false;
+
+      for (let j = 0; j < ingredients.length; j++) {
+        const ingredient = ingredients[j].ingredient.toLowerCase();
+        if (ingredient.includes(query)) {
+          ingredientMatch = true;
+          break; // Exit the loop if a match is found
+        }
+      }
+
+      const isMatch =
         recipe.name.toLowerCase().includes(query) ||
-        recipe.ingredients.some((ingredient) =>
-          ingredient.ingredient.toLowerCase().includes(query)
-        ) ||
-        recipe.description.toLowerCase().includes(query)
-    );
-    
+        ingredientMatch ||
+        recipe.description.toLowerCase().includes(query);
+
+      if (isMatch) {
+        filteredRecipes.push(recipe);
+      }
   }
+  return filteredRecipes;
+}
 }
