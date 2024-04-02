@@ -107,7 +107,7 @@ export class tagTemplate {
    
   }
 
-  GetTagsValues(dropdownMenuID) {
+GetTagsValues(dropdownMenuID) {
     let elements = document.querySelectorAll(
       `[data-category="${dropdownMenuID}"]`
     );
